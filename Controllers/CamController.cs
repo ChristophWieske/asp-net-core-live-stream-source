@@ -1,6 +1,4 @@
-﻿using FFMpegCore;
-using FFMpegCore.Pipes;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
 using System.Net;
@@ -22,20 +20,15 @@ namespace demo.Controllers
         }
 
         [HttpGet]
+        [Route("cam/video")]
         public async Task Get()
         {
             Response.ContentType = "video/webm";
-            
-            await FFMpegArguments
-                .FromPipeInput(new StreamPipeSource())
-                .OutputToPipe(new StreamPipeSink(Response.Body), options => options
-                    .WithVideoCodec("vp9")
-                    .ForceFormat("webm"))
-                .ProcessAsynchronously();
+            // How to go on here? 
         }
 
         [HttpGet]
-        [Route("cam2")]
+        [Route("cam/mjpeg")]
         public async Task Get2()
         {
             Response.StatusCode = 206;
